@@ -40,41 +40,42 @@ public class LoginTest extends SuiteManager {
         text =DriverManager.driver.findElement(By.cssSelector("h3.card-title.mb-0.h6")).getText();
         if (text.equalsIgnoreCase("Login as Existing Customer")) {
             System.out.println("Existing user logins");
+            //Successful login
+
+            DriverManager.driver.findElement(By.name("spree_user[email]")).clear();
+            DriverManager.driver.findElement(By.name("spree_user[email]")).sendKeys(sName);
+
+            DriverManager.driver.findElement(By.name("spree_user[password]")).clear();
+            DriverManager.driver.findElement(By.name("spree_user[password]")).sendKeys(sPass);
+            DriverManager.driver.findElement(By.name("commit")).click();
+            //Logged in successfully
+            text = DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
+            if (text.equalsIgnoreCase("Logged in successfully")) {
+                System.out.println(DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText());
+            }
+
+
+            Boolean bflag = DriverManager.driver.findElement(By.cssSelector("a[href*='/account']")).isDisplayed();
+            if (bflag) {
+                System.out.println("User logged into their account");
+            } else {
+                System.out.println("user logged into some other screen");
+            }
+
+            DriverManager.driver.findElement(By.cssSelector("a[href*='/account']")).click();
+            text = DriverManager.driver.getTitle();
+            if (text.contains("account")) {
+                System.out.println(" The title of the page is " + text);
+            }
+
+            DriverManager.driver.findElement(By.cssSelector("a[href*='/logout']")).click();
+            text = DriverManager.driver.getTitle();
+            if (text.equalsIgnoreCase("https://spree-vapasi-prod.herokuapp.com/")) {
+                System.out.println("User is in home page");
+            }
+        }else {
+            System.out.println("New Customer ! Needs to rigister");
         }
-
-        //Successful login
-
-        DriverManager.driver.findElement(By.name("spree_user[email]")).clear();
-        DriverManager.driver.findElement(By.name("spree_user[email]")).sendKeys(sName);
-
-        DriverManager.driver.findElement(By.name("spree_user[password]")).clear();
-        DriverManager.driver.findElement(By.name("spree_user[password]")).sendKeys(sPass);
-        DriverManager.driver.findElement(By.name("commit")).click();
-        //Logged in successfully
-        text =DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
-        if (text.equalsIgnoreCase("Logged in successfully")) {
-            System.out.println(DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText());
-        }
-
-
-        Boolean bflag =DriverManager.driver.findElement(By.cssSelector("a[href*='/account']")).isDisplayed();
-        if (bflag) {
-            System.out.println("User logged into their account");
-        } else {
-            System.out.println("user logged into some other screen");
-        }
-
-        DriverManager.driver.findElement(By.cssSelector("a[href*='/account']")).click();
-        text=DriverManager.driver.getTitle();
-        if (text.contains("account")) {
-            System.out.println(" The title of the page is " +text);
-        }
-
-        DriverManager.driver.findElement(By.cssSelector("a[href*='/logout']")).click();
-        text=DriverManager.driver.getTitle();
-        if (text.equalsIgnoreCase("https://spree-vapasi-prod.herokuapp.com/")) {
-            System.out.println("User is in home page");
         }
     }
 
-}
