@@ -13,7 +13,7 @@ public class DriverManager {
     public DriverManager() {
         String chromeDriverPath = System.getProperty("user.dir")+"/" + "src/main/resources/drivers/chromedriver";
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
     }
 }
