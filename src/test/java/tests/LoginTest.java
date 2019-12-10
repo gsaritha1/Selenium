@@ -4,17 +4,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import suite.SuiteManager;
+import util.ConfigFileReader;
 import util.DriverManager;
 
 public class LoginTest extends SuiteManager {
-    @Test
-     public void verifyLoginLogout(){
+    //Reads
+    /*ConfigFileReader config = new ConfigFileReader();
+    String sName;
+    String sPass;
+    @BeforeTest
+    public void loginCredentials(){
+         sName = config.getProperty("user_name");
+         sPass = config.getProperty("user_password");
+    }*/
+
+
+    @Test (dataProvider = "loginCredentials", dataProviderClass=testdata.loginCredentials.class)
+     public void verifyLoginLogout(String sName,String sPass){
     // TODO Auto-generated method stub
         String chromeDriverPath = System.getProperty("user.dir") + "/" + "src/main/resources/drivers/chromedriver";
-        String tName="gsar@rediffmail.com";
-        String tPass="Testing12";
+     //   String tName="gsar@rediffmail.com";
+       // String tPass="Testing12";
+
 
         WebElement loginLink = DriverManager.driver.findElement(By.id("link-to-login"));
         loginLink.click();
@@ -30,10 +45,10 @@ public class LoginTest extends SuiteManager {
         //Successful login
 
         DriverManager.driver.findElement(By.name("spree_user[email]")).clear();
-        DriverManager.driver.findElement(By.name("spree_user[email]")).sendKeys(tName);
+        DriverManager.driver.findElement(By.name("spree_user[email]")).sendKeys(sName);
 
         DriverManager.driver.findElement(By.name("spree_user[password]")).clear();
-        DriverManager.driver.findElement(By.name("spree_user[password]")).sendKeys(tPass);
+        DriverManager.driver.findElement(By.name("spree_user[password]")).sendKeys(sPass);
         DriverManager.driver.findElement(By.name("commit")).click();
         //Logged in successfully
         text =DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();

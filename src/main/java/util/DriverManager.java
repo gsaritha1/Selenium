@@ -11,7 +11,7 @@ public class DriverManager {
     public static WebDriver driver;
 
     public DriverManager() {
-        String chromeDriverPath = System.getProperty("user.dir")+"/" + "src/main/resources/drivers/chromedriver";
+        String chromeDriverPath = System.getProperty("user.dir") + "/" + "src/main/resources/drivers/chromedriver";
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
