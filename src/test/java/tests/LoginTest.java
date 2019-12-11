@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
 import suite.SuiteManager;
 import util.ConfigFileReader;
 import util.DriverManager;
@@ -21,7 +24,9 @@ public class LoginTest extends SuiteManager {
          sName = config.getProperty("user_name");
          sPass = config.getProperty("user_password");
     }*/
-
+    public BasePage basePage;
+    public LoginPage loginPage;
+    public HomePage homePage;
 
     @Test (dataProvider = "loginCredentials", dataProviderClass=testdata.loginCredentials.class)
      public void verifyLoginLogout(String sName,String sPass){
@@ -29,27 +34,30 @@ public class LoginTest extends SuiteManager {
         String chromeDriverPath = System.getProperty("user.dir") + "/" + "src/main/resources/drivers/chromedriver";
      //   String tName="gsar@rediffmail.com";
        // String tPass="Testing12";
+       // basePage = new BasePage(DriverManager.driver);
+        basePage = new BasePage();
+        loginPage=basePage.clickLoginButton();
+        homePage = loginPage.login(sName,sPass);
 
+       // WebElement loginLink = DriverManager.driver.findElement(By.id("link-to-login"));
+        //loginLink.click();
+    //    DriverManager.driver.findElement(By.id("link-to-login")).click();
 
-        WebElement loginLink = DriverManager.driver.findElement(By.id("link-to-login"));
-        loginLink.click();
-        DriverManager.driver.findElement(By.id("link-to-login")).click();
-
-        String text=DriverManager.driver.getTitle();
+        /*String text=DriverManager.driver.getTitle();
         System.out.println("the window title is " + text);
         text =DriverManager.driver.findElement(By.cssSelector("h3.card-title.mb-0.h6")).getText();
         if (text.equalsIgnoreCase("Login as Existing Customer")) {
-            System.out.println("Existing user logins");
+            System.out.println("Existing user logins");*/
             //Successful login
 
-            DriverManager.driver.findElement(By.name("spree_user[email]")).clear();
-            DriverManager.driver.findElement(By.name("spree_user[email]")).sendKeys(sName);
+           // DriverManager.driver.findElement(By.name("spree_user[email]")).clear();
+            //DriverManager.driver.findElement(By.name("spree_user[email]")).sendKeys(sName);
 
-            DriverManager.driver.findElement(By.name("spree_user[password]")).clear();
-            DriverManager.driver.findElement(By.name("spree_user[password]")).sendKeys(sPass);
-            DriverManager.driver.findElement(By.name("commit")).click();
+            //DriverManager.driver.findElement(By.name("spree_user[password]")).clear();
+            //DriverManager.driver.findElement(By.name("spree_user[password]")).sendKeys(sPass);
+        //    DriverManager.driver.findElement(By.name("commit")).click();
             //Logged in successfully
-            text = DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
+            String text = DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
             if (text.equalsIgnoreCase("Logged in successfully")) {
                 System.out.println(DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText());
             }
@@ -73,9 +81,9 @@ public class LoginTest extends SuiteManager {
             if (text.equalsIgnoreCase("https://spree-vapasi-prod.herokuapp.com/")) {
                 System.out.println("User is in home page");
             }
-        }else {
+       /* }else {
             System.out.println("New Customer ! Needs to rigister");
-        }
+        }*/
         }
     }
 

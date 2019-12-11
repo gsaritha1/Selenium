@@ -12,24 +12,31 @@ public class Checkout {
    public static void main(String[] args) {
         // TODO Auto-generated method stub
        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/" + "src/main/resources/chromedriver");
-        WebDriver driver = new ChromeDriver();
+       String sURL="https://spree-vapasi-prod.herokuapp.com/";
+       String text=null;
+       String tName=null;
+       String tPass=null;
+       String sProduct =null;
+       String sText =null;
+       Boolean bflag = false;
+       WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
-        driver.navigate().to("https://spree-vapasi-prod.herokuapp.com/");
+        driver.navigate().to(sURL);
 
         driver.findElement(By.id("link-to-login")).click();
 
-        String text=driver.getTitle();
+         text=driver.getTitle();
         System.out.println("the window title is " + text);
         text =driver.findElement(By.cssSelector("h3.card-title.mb-0.h6")).getText();
         if (text.equalsIgnoreCase("Login as Existing Customer")) {
             System.out.println("Existing user logins");
         }
         //login existing customer
-        String tName="gsar@rediffmail.com";
+         tName="gsar@rediffmail.com";
         driver.findElement(By.name("spree_user[email]")).sendKeys(tName);
-        String tPass="Testing12";
+         tPass="Testing12";
         driver.findElement(By.name("spree_user[password]")).sendKeys(tPass);
         driver.findElement(By.name("commit")).click();
         //Invalid email or password
@@ -46,12 +53,12 @@ public class Checkout {
         }
 
         //Select a product
-        String sProduct="Ruby on Rails Bag";
+         sProduct="Ruby on Rails Bag";
         driver.findElement(By.xpath("//span[contains(text(),'Ruby on Rails Bag')]")).click();
 
         //navigate products detail screen
-        String sText = driver.findElement(By.xpath("//*[@id=\"product-description\"]/h1")).getText();
-        Boolean bflag = sText.equalsIgnoreCase(sProduct);
+         sText = driver.findElement(By.xpath("//*[@id=\"product-description\"]/h1")).getText();
+         bflag = sText.equalsIgnoreCase(sProduct);
         if (bflag==true) {
             System.out.println("Select product is " +sProduct);
         }

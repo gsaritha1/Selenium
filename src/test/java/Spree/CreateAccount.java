@@ -10,24 +10,30 @@ public class CreateAccount {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/" + "src/main/resources/chromedriver");
+        String sURL="https://spree-vapasi-prod.herokuapp.com/";
+        String text=null;
+        String tName=null;
+        String tPass=null;
+        Boolean bflag = false;
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
-        driver.navigate().to("https://spree-vapasi-prod.herokuapp.com/");
+        driver.navigate().to(sURL);
 
         driver.findElement(By.id("link-to-login")).click();
 
-        String text=driver.getTitle();
+         text=driver.getTitle();
         System.out.println("the window title is " + text);
         driver.findElement(By.cssSelector("a[href*='signup']")).click();
-        String tName=driver.findElement(By.cssSelector("h3.card-title.mb-0.h6")).getText();
+         tName=driver.findElement(By.cssSelector("h3.card-title.mb-0.h6")).getText();
         System.out.println("Creating an account for  " +tName);
 
         // invalid email
         tName="gsar41@rediffmailcom";
         driver.findElement(By.name("spree_user[email]")).sendKeys(tName);
-        String tPass="Testing12";
+         tPass="Testing12";
         driver.findElement(By.name("spree_user[password]")).sendKeys(tPass);
         driver.findElement(By.id("spree_user_password_confirmation")).sendKeys(tPass);
         driver.findElement(By.name("commit")).click();
@@ -74,7 +80,7 @@ public class CreateAccount {
         }
 
 
-        Boolean bflag =driver.findElement(By.cssSelector("a[href*='/account']")).isDisplayed();
+         bflag =driver.findElement(By.cssSelector("a[href*='/account']")).isDisplayed();
         if (bflag) {
             System.out.println("User logged into their account");
         } else {
