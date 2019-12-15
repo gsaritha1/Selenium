@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.BasePage;
 import pages.HomePage;
@@ -35,9 +35,13 @@ public class LoginTest extends SuiteManager {
      //   String tName="gsar@rediffmail.com";
        // String tPass="Testing12";
        // basePage = new BasePage(DriverManager.driver);
+
+       // System.out.println(browser);
         basePage = new BasePage();
+        basePage.verifybasePage();
         loginPage=basePage.clickLoginButton();
         homePage = loginPage.login(sName,sPass);
+        homePage.verifyHomepage();
 
        // WebElement loginLink = DriverManager.driver.findElement(By.id("link-to-login"));
         //loginLink.click();
@@ -57,30 +61,26 @@ public class LoginTest extends SuiteManager {
             //DriverManager.driver.findElement(By.name("spree_user[password]")).sendKeys(sPass);
         //    DriverManager.driver.findElement(By.name("commit")).click();
             //Logged in successfully
-            String text = DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
+         /*   String text = DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText();
             if (text.equalsIgnoreCase("Logged in successfully")) {
                 System.out.println(DriverManager.driver.findElement(By.xpath("//div[contains(@class,'alert')]")).getText());
-            }
+            }*/
 
 
-            Boolean bflag = DriverManager.driver.findElement(By.cssSelector("a[href*='/account']")).isDisplayed();
+         /*   Boolean bflag = DriverManager.driver.findElement(By.cssSelector("a[href*='/account']")).isDisplayed();
             if (bflag) {
                 System.out.println("User logged into their account");
             } else {
                 System.out.println("user logged into some other screen");
             }
 
-            DriverManager.driver.findElement(By.cssSelector("a[href*='/account']")).click();
-            text = DriverManager.driver.getTitle();
-            if (text.contains("account")) {
-                System.out.println(" The title of the page is " + text);
-            }
+
 
             DriverManager.driver.findElement(By.cssSelector("a[href*='/logout']")).click();
-            text = DriverManager.driver.getTitle();
+            String text = DriverManager.driver.getTitle();
             if (text.equalsIgnoreCase("https://spree-vapasi-prod.herokuapp.com/")) {
                 System.out.println("User is in home page");
-            }
+            }*/
        /* }else {
             System.out.println("New Customer ! Needs to rigister");
         }*/

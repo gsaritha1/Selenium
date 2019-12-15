@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,14 +26,15 @@ public class DriverManager {
 //        driver = new ChromeDriver();
 
         DesiredCapabilities caps = new DesiredCapabilities();
+      //  if(browser.equalsIgnoreCase("Chrome\"")) {
 
-        caps.setCapability("browser", "Chrome");
-        caps.setCapability("browser_version", "78.0");
-        caps.setCapability("os", "Windows");
-        caps.setCapability("os_version", "10");
-        caps.setCapability("resolution", "1024x768");
-        caps.setCapability("name", "Bstack-[Java] Sample Test");
-
+            caps.setCapability("browser", "Chrome");
+            caps.setCapability("browser_version", "78.0");
+            caps.setCapability("os", "Windows");
+            caps.setCapability("os_version", "10");
+            caps.setCapability("resolution", "1024x768");
+            caps.setCapability("name", "Bstack-[Java] Sample Test");
+      // }
 
         driver = new RemoteWebDriver(new URL(URL), caps);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);

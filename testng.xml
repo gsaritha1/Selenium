@@ -3,7 +3,7 @@
     <test name="Login and Search">
         <classes>
             <class name="tests.LoginTest"/>
-            <class name="tests.searchItem"/>
+            <class name="tests.SearchandVerifyItem"/>
         </classes>
     </test>
 </suite>

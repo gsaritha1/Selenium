@@ -22,10 +22,13 @@ public class BasePage extends SuiteManager {
 
     WebDriverWait wait = new WebDriverWait(DriverManager.driver,10);
 
+    public void verifybasePage(){
+        loginButton= wait.until(ExpectedConditions.visibilityOf(loginButton));
+    }
     public LoginPage clickLoginButton() {
 
         //guru99seleniumlink= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath( "/html/body/div[1]/section/div[2]/div/div[1]/div/div[1]/div/div/div/div[2]/div[2]/div/div/div/div/div[1]/div/div/a/i")));
-        loginButton= wait.until(ExpectedConditions.visibilityOf(loginButton));
+       // loginButton= wait.until(ExpectedConditions.visibilityOf(loginButton));
         loginButton.click();
         return new LoginPage();
     }

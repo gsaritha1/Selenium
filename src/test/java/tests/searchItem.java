@@ -21,7 +21,9 @@ public class searchItem extends SuiteManager {
     @BeforeTest
     public void seachProd(){
         sSelCat= config.getProperty("selectCat");
-        sSearchItem= config.getProperty("searchItem");
+        System.out.println("select category is "+sSelCat);
+        sSearchItem= config.getProperty("searchBrandItem");
+        System.out.println("Search item is "+sSearchItem);
     }
 
     @Test

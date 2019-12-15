@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="testsuite" thread-count="2" parallel="test" version="1">
+    <test name="Login and Search in Chrome">
+        <parameter name="browser" value="Chrome" ></parameter>
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.searchItem"/>
+        </classes>
+    </test>
+</suite>

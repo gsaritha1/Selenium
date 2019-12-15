@@ -3,6 +3,7 @@ package suite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import util.ConfigFileReader;
 import util.DriverManager;
 
@@ -14,6 +15,7 @@ public class SuiteManager {
 
     @BeforeSuite(alwaysRun = true)
     public void startDriver() throws MalformedURLException {
+
         driverManager = new DriverManager();
     }
 
