@@ -50,7 +50,7 @@ public class SearchItemPage extends SuiteManager {
         searchBtn.click();
         stitle= wait.until(ExpectedConditions.visibilityOf(stitle));
         String stext=stitle.getText();
-        if  (stext.equalsIgnoreCase(value)) {
+        if  (stext.contains(value)) {
             System.out.println("Window title is as per search item  " + stext);
         } else {
             System.out.println("Window title is not as per search item  " + stext);

@@ -41,9 +41,8 @@ public class SearchandVerifyItem extends SuiteManager {
         loginPage=basePage.clickLoginButton();
         homePage = loginPage.login(sName,sPass);
         searchItemPage.enterSearchItem(sItem);
-        //System.out.println("done Step4");
-        //searchItemPage.searchBtn(sTitle);
-        //prodList=searchItemPage.productsList(sSearchItem);
+        searchItemPage.searchBtn(sTitle);
+        prodList=searchItemPage.productsList(sItem);
 
     }
 }
