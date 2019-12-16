@@ -10,9 +10,7 @@ import pages.SearchItemPage;
 import suite.SuiteManager;
 import util.ConfigFileReader;
 
-
 import java.util.ArrayList;
-
 
 public class SearchandVerifyItem extends SuiteManager {
     //Reads
@@ -38,11 +36,19 @@ public class SearchandVerifyItem extends SuiteManager {
         String chromeDriverPath = System.getProperty("user.dir") + "/" + "src/main/resources/drivers/chromedriver";
         ArrayList<String> prodList = new ArrayList<String>( );
         basePage = new BasePage();
+        searchItemPage = new SearchItemPage();
+
         loginPage=basePage.clickLoginButton();
         homePage = loginPage.login(sName,sPass);
+
         searchItemPage.enterSearchItem(sItem);
-        searchItemPage.searchBtn(sTitle);
-        prodList=searchItemPage.productsList(sItem);
+        searchItemPage.searchBtn();
+        searchItemPage.getSearchURL(sTitle);
+        prodList = searchItemPage.productsList(sItem);
+        for (String stext: prodList)
+        {
+            System.out.println("Products searched are "+ stext);
+        }
 
     }
 }

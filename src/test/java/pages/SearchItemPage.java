@@ -1,6 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,10 +15,7 @@ import java.util.List;
 
 public class SearchItemPage extends SuiteManager {
 
-    //public BasePage(WebDriver driver) {
-    public SearchItemPage(){
-        PageFactory.initElements(DriverManager.driver,this);
-    }
+   public SearchItemPage(){ PageFactory.initElements(DriverManager.driver,this); }
 
     @FindBy(css = "a[href*='/t/bags']")
     private WebElement sSelCatBag;
@@ -29,13 +26,9 @@ public class SearchItemPage extends SuiteManager {
     @FindBy(css ="input[value='Search']")
     private WebElement searchBtn;
 
-    @FindBy(tagName ="title" )
-    private  WebElement stitle;
     @FindBy(css ="div[id^='product_']")
-   private static WebElement sProducts;
+   private static List<WebElement> sProducts;
 
-   // private WebElement getTitle;
-    //DriverManager.driver.findElement(By.cssSelector("input[value='Search']")).click();
    WebDriverWait wait = new WebDriverWait(DriverManager.driver,10);
 
     public void enterSearchItem(String value){
@@ -46,10 +39,12 @@ public class SearchItemPage extends SuiteManager {
         System.out.println("searching value");
     }
 
-    public void searchBtn(String value){
+    public void searchBtn(){
         searchBtn.click();
-        stitle= wait.until(ExpectedConditions.visibilityOf(stitle));
-        String stext=stitle.getText();
+    }
+
+    public void getSearchURL(String value){
+       String stext= DriverManager.driver.getCurrentUrl();
         if  (stext.contains(value)) {
             System.out.println("Window title is as per search item  " + stext);
         } else {
@@ -57,26 +52,21 @@ public class SearchItemPage extends SuiteManager {
         }
     }
 
-    public static ArrayList<String> productsList(String keyword) {
-        List <WebElement> prodList = (List<WebElement>) sProducts;
-        Integer intSize=prodList.size();
-        boolean bflag =false;
+    public static ArrayList<String> productsList(String sItem) {
+        int intSize=sProducts.size();
         ArrayList<String> sProdName = new ArrayList<String>();
         if (intSize >0) {
-            System.out.println("no of product list"+prodList.size());
-
+            System.out.println("no of product list"+intSize);
             for (int inum=0; inum<intSize;inum++) {
-                String sProd = prodList.get(1).getText();
-                System.out.println("Product name is " + sProd);
-                if (sProd.contains(keyword)) {
+                String sProd = sProducts.get(inum).getText();
+                if (sProd.contains(sItem)) {
                     sProdName.add(sProd);
-                    bflag = true;
                 } else{
-                    bflag = false;
+                    System.out.println("Product name in the search list" + sProd+" not part of search item");
                 }
             }
         } else {
-                System.out.println("No products searched for "+ keyword);
+                System.out.println("No products searched for "+ sItem);
             }
         return sProdName;
     }
