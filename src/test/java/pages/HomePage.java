@@ -6,11 +6,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import suite.SuiteManager;
 import util.DriverManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.testng.Assert.assertNotEquals;
 
 public class HomePage extends SuiteManager {
 
@@ -37,8 +40,10 @@ public class HomePage extends SuiteManager {
         String text = loginAlert.getText();
         if (text.equalsIgnoreCase("Logged in successfully")) {
             System.out.println("user logged in successfully and navigated to Home page");
+            Assert.assertEquals(text,"Logged in successfully");
         } else {
             System.out.println("The message is "+ text);
+            assertNotEquals(text,"Logged in successfully");
 
         }
     }

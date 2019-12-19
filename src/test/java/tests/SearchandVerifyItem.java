@@ -49,6 +49,5 @@ public class SearchandVerifyItem extends SuiteManager {
         {
             System.out.println("Products searched are "+ stext);
         }
-
     }
 }

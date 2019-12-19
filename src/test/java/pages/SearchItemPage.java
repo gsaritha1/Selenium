@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import suite.SuiteManager;
 import util.DriverManager;
 
@@ -36,7 +37,6 @@ public class SearchItemPage extends SuiteManager {
         sSearchItem.click();
         sSearchItem.clear();
         sSearchItem.sendKeys(value);
-        System.out.println("searching value");
     }
 
     public void searchBtn(){
@@ -47,8 +47,10 @@ public class SearchItemPage extends SuiteManager {
        String stext= DriverManager.driver.getCurrentUrl();
         if  (stext.contains(value)) {
             System.out.println("Window title is as per search item  " + stext);
+            Assert.assertTrue(true,"Window title is as per search item  " + stext);
         } else {
             System.out.println("Window title is not as per search item  " + stext);
+            Assert.assertFalse(false,"Window title is not as per search item " + stext);
         }
     }
 
@@ -61,12 +63,15 @@ public class SearchItemPage extends SuiteManager {
                 String sProd = sProducts.get(inum).getText();
                 if (sProd.contains(sItem)) {
                     sProdName.add(sProd);
+                    Assert.assertTrue(true,"Product name in the search list"+sProd);
                 } else{
                     System.out.println("Product name in the search list" + sProd+" not part of search item");
+                    Assert.assertFalse(false,"Product name in the search list"+sProd);
                 }
             }
         } else {
                 System.out.println("No products searched for "+ sItem);
+                Assert.assertFalse(false,"No products searched for "+ sItem);
             }
         return sProdName;
     }
